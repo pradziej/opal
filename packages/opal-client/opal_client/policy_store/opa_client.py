@@ -750,12 +750,14 @@ class OpaClient(BasePolicyStoreClient):
             try:
                 headers = await self._get_auth_headers()
                 data = json.dumps(exclude_none_fields(policy_data))
+                logger.info(">> Destination url='{fullUrl}'",fullUrl=f"{self._opa_url}/data{path}")
                 async with session.put(
                     f"{self._opa_url}/data{path}",
                     data=data,
                     headers=headers,
                     **self._ssl_context_kwargs,
                 ) as opa_response:
+                    logger.info(">> OPA response url='{fullUrl}' ({opa_response.status_code})",fullUrl=f"{self._opa_url}/data{path}")
                     response = await proxy_response_unless_invalid(
                         opa_response,
                         accepted_status_codes=[

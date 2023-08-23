@@ -428,7 +428,7 @@ class DataUpdater:
                         # save the report for the entry
                         reports.append(report)
                     except Exception:
-                        logger.exception("Failed to save data update to policy-store")
+                        logger.exception(">> Failed to save data update to policy-store")
                         # we failed to save to policy-store
                         report.saved = False
                         # save the report for the entry
@@ -468,7 +468,7 @@ class DataUpdater:
         self, tx, url: str, path: str, save_method: str, data: JsonableValue
     ):
         logger.info(
-            "Saving fetched data to policy-store: source url='{url}', destination path='{path}'",
+            ">> Saving fetched data to policy-store: source url='{url}', destination path='{path}'",
             url=url,
             path=path or "/",
         )
